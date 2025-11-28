@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aoc-2025", "aoc-2025\aoc-2025.csproj", "{171C6299-8E7D-4D54-BC5C-68ADAA83E5CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aoc-2025-tests", "aoc-2025-tests\aoc-2025-tests.csproj", "{51C1CE7F-001F-46DF-99FB-3B1F6AB4E58F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{171C6299-8E7D-4D54-BC5C-68ADAA83E5CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171C6299-8E7D-4D54-BC5C-68ADAA83E5CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171C6299-8E7D-4D54-BC5C-68ADAA83E5CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171C6299-8E7D-4D54-BC5C-68ADAA83E5CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C1CE7F-001F-46DF-99FB-3B1F6AB4E58F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C1CE7F-001F-46DF-99FB-3B1F6AB4E58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C1CE7F-001F-46DF-99FB-3B1F6AB4E58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C1CE7F-001F-46DF-99FB-3B1F6AB4E58F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

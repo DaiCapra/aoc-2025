@@ -1,0 +1,9 @@
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+# Build outputs
+bin/
+obj/
+
