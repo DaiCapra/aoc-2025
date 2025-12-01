@@ -9,7 +9,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Task1\" />
+      <None Update="Task1\input.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
+

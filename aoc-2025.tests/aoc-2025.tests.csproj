@@ -22,4 +22,14 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\aoc-2025\aoc-2025.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Task1\input.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
