@@ -4,20 +4,52 @@ namespace aoc_2025.Task1;
 
 public class Password(int initial = 50)
 {
-    public int position = initial;
-    public int count;
-
     private const int Modulo = 100;
+    public int passedZeroCount;
+    public int position = initial;
+    public int stoppedAtZeroCount;
+    public int TotalCount => stoppedAtZeroCount + passedZeroCount;
 
     public void Apply(List<Instruction> instructions)
     {
         foreach (var instruction in instructions)
         {
-            position = MathLib.Mod(position + instruction.steps, Modulo);
-            if (position == 0)
+            Rotate(instruction.steps);
+        }
+    }
+
+    public void Rotate(int steps)
+    {
+        var count = Math.Abs(steps);
+        var direction = Math.Sign(steps);
+
+        for (int i = 0; i < count; i++)
+        {
+            position += direction;
+            WrapPosition();
+
+            if (position is 0 or Modulo)
             {
-                count++;
+                bool isLastStep = i == count - 1;
+                if (isLastStep)
+                {
+                    stoppedAtZeroCount++;
+                }
+                else
+                {
+                    passedZeroCount++;
+                }
             }
         }
+    }
+
+    private void WrapPosition()
+    {
+        position = position switch
+        {
+            >= Modulo => 0,
+            < 0 => Modulo - 1,
+            _ => position
+        };
     }
 }

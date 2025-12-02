@@ -15,6 +15,8 @@ public class Program
         var password = new Password();
         password.Apply(instructions);
 
-        Console.WriteLine(password.count);
+        Console.WriteLine($"Stop: {password.stoppedAtZeroCount}");
+        Console.WriteLine($"Pass: {password.passedZeroCount}");
+        Console.WriteLine($"Total: {password.TotalCount}");
     }
 }
