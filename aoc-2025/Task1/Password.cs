@@ -1,6 +1,4 @@
-﻿using aoc_2025.Common;
-
-namespace aoc_2025.Task1;
+﻿namespace aoc_2025.Task1;
 
 public class Password(int initial = 50)
 {
