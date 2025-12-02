@@ -5,7 +5,9 @@ namespace aoc_2025.Task1;
 public class Password(int initial = 50)
 {
     public int position = initial;
-    public int count;
+    public int stoppedAtZeroCount;
+    public int passedZeroCount;
+    public int TotalCount => stoppedAtZeroCount + passedZeroCount;
 
     private const int Modulo = 100;
 
@@ -13,11 +15,15 @@ public class Password(int initial = 50)
     {
         foreach (var instruction in instructions)
         {
-            position = MathLib.Mod(position + instruction.steps, Modulo);
-            if (position == 0)
-            {
-                count++;
-            }
+            Rotate(instruction.steps);
         }
+    }
+
+    public void Rotate(int steps)
+    {
+        var a = position + steps;
+        bool didPassZero = a is < 0 or >= Modulo;
+
+        position = MathLib.Mod(a, Modulo);
     }
 }
