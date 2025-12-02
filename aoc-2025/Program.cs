@@ -13,7 +13,7 @@ public class Program
     private void Run()
     {
         var ranges = Parser.Parse("input.txt");
-        var count = Solver.Sum(ranges);
+        var count = Solver.Sum(ranges, true);
         Console.WriteLine(count);
     }
 }

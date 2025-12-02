@@ -2,38 +2,53 @@
 
 public static class Solver
 {
-    public static bool IsValid(ulong value, bool onlyConsiderTwo = true)
+    public static bool IsValid(ulong value, bool onlyConsiderTwoBuckets = true)
     {
         var digits = value.ToString();
         int numberOfDigits = digits.Length;
 
-        bool isEven = numberOfDigits % 2 == 0;
-        if (!isEven)
+        var visited = new HashSet<int>();
+        for (int i = 1; i <= numberOfDigits; i++)
         {
-            return true;
-        }
+            if (onlyConsiderTwoBuckets && i != 2)
+            {
+                continue;
+            }
 
-        var bucketSize = numberOfDigits / 2;
-        var buckets = digits.Chunk(bucketSize)
-            .Select(chunk => new string(chunk))
-            .ToArray();
+            var bucketSize = (int)Math.Ceiling((double)numberOfDigits / i);
+            if (!visited.Add(bucketSize))
+            {
+                // Don't re-check the same bucket size
+                continue;
+            }
 
-        if (onlyConsiderTwo && buckets[0] == buckets[1])
-        {
-            // Part 1 
-            return false;
+            var buckets = digits.Chunk(bucketSize)
+                .Select(chunk => new string(chunk))
+                .ToArray();
+
+            if (buckets.Length < 2)
+            {
+                continue;
+            }
+
+            var uniform = buckets.All(t => t == buckets[0]);
+            if (uniform)
+            {
+                return false;
+            }
         }
 
         return true;
     }
 
-    public static ulong Sum(List<Range> ranges)
+
+    public static ulong Sum(List<Range> ranges, bool onlyConsiderTwoBuckets = true)
     {
         ulong count = 0;
 
         foreach (var range in ranges)
         {
-            var set = Solver.FindInvalidIds(range);
+            var set = FindInvalidIds(range, onlyConsiderTwoBuckets);
             foreach (var invalid in set)
             {
                 count += invalid;
@@ -43,13 +58,13 @@ public static class Solver
         return count;
     }
 
-    public static HashSet<ulong> FindInvalidIds(Range range)
+    private static HashSet<ulong> FindInvalidIds(Range range, bool onlyConsiderTwoBuckets = true)
     {
         var set = new HashSet<ulong>();
 
         for (ulong i = range.min; i <= range.max; i++)
         {
-            if (!IsValid(i))
+            if (!IsValid(i, onlyConsiderTwoBuckets))
             {
                 set.Add(i);
             }

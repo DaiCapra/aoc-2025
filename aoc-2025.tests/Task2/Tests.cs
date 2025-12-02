@@ -6,13 +6,22 @@ namespace aoc_2025_tests.Task2;
 public class Tests
 {
     [Test]
-    public void Example()
+    public void Example1()
     {
         var ranges = Parser.Parse("Task2/test-input.txt");
         var count = Solver.Sum(ranges);
         Assert.That(count, Is.EqualTo(1227775554));
     }
-    
+
+    [Test]
+    public void Example2()
+    {
+        var ranges = Parser.Parse("Task2/test-input.txt");
+        var count = Solver.Sum(ranges, false);
+        Assert.That(count, Is.EqualTo(4174379265));
+    }
+
+
     [Test]
     public void Part1Invalids()
     {
@@ -27,9 +36,13 @@ public class Tests
     }
 
     [Test]
-    public void Par2Invalids()
+    public void Part2Invalids()
     {
-        Assert.That(Solver.IsValid(999), Is.False);
+        Assert.That(Solver.IsValid(11, false), Is.False);
+        Assert.That(Solver.IsValid(22, false), Is.False);
+        Assert.That(Solver.IsValid(111, false), Is.False);
+        Assert.That(Solver.IsValid(999, false), Is.False);
+        Assert.That(Solver.IsValid(824824824, false), Is.False);
     }
 
     [Test]
