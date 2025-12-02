@@ -10,6 +10,5 @@ obj/
 # Ignore shortcuts
 *.lnk
 
-# Advent of Code input files (personal puzzle inputs should not be shared)
 **/input.txt
 
