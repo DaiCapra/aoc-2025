@@ -1,14 +1,14 @@
 ﻿namespace aoc_2025.Task1;
 
-public class Parser
+public static class Parser
 {
-    public List<Instruction> Parse(string filepath)
+    public static List<Instruction> Parse(string filepath)
     {
         var lines = File.ReadAllLines(filepath);
         return Parse(lines);
     }
 
-    private List<Instruction> Parse(IEnumerable<string> text)
+    private static List<Instruction> Parse(IEnumerable<string> text)
     {
         var list = new List<Instruction>();
 

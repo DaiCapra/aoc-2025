@@ -7,7 +7,7 @@ public class Tests
     [Test]
     public void Example()
     {
-        var instructions = new Parser().Parse("Task1/test-input.txt");
+        var instructions = Parser.Parse("Task1/test-input.txt");
 
         var password = new Password();
         password.Apply(instructions);
