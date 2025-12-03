@@ -8,11 +8,11 @@ public class Password(int initial = 50)
     public int stoppedAtZeroCount;
     public int TotalCount => stoppedAtZeroCount + passedZeroCount;
 
-    public void Apply(List<Instruction> instructions)
+    public void Apply(List<int> instructions)
     {
         foreach (var instruction in instructions)
         {
-            Rotate(instruction.steps);
+            Rotate(instruction);
         }
     }
 

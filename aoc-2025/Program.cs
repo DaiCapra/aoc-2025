@@ -14,12 +14,7 @@ public class Program
     private void Run()
     {
         var joltages = Parser.Parse("input.txt");
-        var sw = new Stopwatch();
-        sw.Start();
-
         var i = joltages.Sum(t => Solver.GetJoltage(t, numberOfDigits: 12));
         Console.WriteLine(i);
-        
-        Console.WriteLine($"Elapsed time: {sw.Elapsed}");
     }
 }
