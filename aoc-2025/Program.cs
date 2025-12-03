@@ -1,4 +1,5 @@
-﻿using aoc_2025.Task2;
+﻿using System.Diagnostics;
+using aoc_2025.Task3;
 
 namespace aoc_2025;
 
@@ -12,8 +13,13 @@ public class Program
 
     private void Run()
     {
-        var ranges = Parser.Parse("input.txt");
-        var count = Solver.Sum(ranges, true);
-        Console.WriteLine(count);
+        var joltages = Parser.Parse("input.txt");
+        var sw = new Stopwatch();
+        sw.Start();
+
+        var i = joltages.Sum(t => Solver.GetJoltage(t, numberOfDigits: 12));
+        Console.WriteLine(i);
+        
+        Console.WriteLine($"Elapsed time: {sw.Elapsed}");
     }
 }

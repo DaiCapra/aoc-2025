@@ -14,5 +14,9 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Combinatorics" Version="2.0.0" />
+    </ItemGroup>
+
 </Project>
 

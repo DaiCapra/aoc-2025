@@ -1,5 +1,4 @@
 using aoc_2025.Task2;
-using Range = aoc_2025.Task2.Range;
 
 namespace aoc_2025_tests.Task2;
 
