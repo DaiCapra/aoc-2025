@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using aoc_2025.Task3;
+﻿using aoc_2025.Task4;
 
 namespace aoc_2025;
 
@@ -13,8 +12,9 @@ public class Program
 
     private void Run()
     {
-        var joltages = Parser.Parse("input.txt");
-        var i = joltages.Sum(t => Solver.GetJoltage(t, numberOfDigits: 12));
-        Console.WriteLine(i);
+        var grid = Parser.Parse("input.txt");
+        var count = Solver.GetPaperRollCount(grid, remove: true);
+
+        Console.WriteLine($"Rolls: {count}");
     }
 }
