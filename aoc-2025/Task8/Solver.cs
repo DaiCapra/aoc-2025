@@ -2,6 +2,12 @@ using aoc_2025.Common;
 
 namespace aoc_2025.Task8;
 
+public class Result
+{
+    public long total;
+    public long extension;
+}
+
 public static class Solver
 {
     private static void Merge(Circuit c1, Circuit c2)
@@ -14,8 +20,10 @@ public static class Solver
         c2.junctions.Clear();
     }
 
-    public static long Solve(List<Junction> junctions, int iterations = 10)
+    public static Result Solve(List<Junction> junctions, int iterations = 10)
     {
+        var result = new Result();
+        
         var edges = GetCombinations(junctions);
         var sortedEdges = edges
             .OrderBy(e => e.distance)
@@ -31,7 +39,6 @@ public static class Solver
             }
 
             var edge = sortedEdges.Pop(0);
-            Console.WriteLine($"{i + 1}: {edge}");
 
             var j1 = edge.first;
             var j2 = edge.second;
@@ -40,7 +47,7 @@ public static class Solver
             {
                 continue;
             }
-            
+
             var id = GetBestId(j1.circuitId, j2.circuitId, ref identity);
             if (!map.TryGetValue(id, out var circuit))
             {
@@ -64,6 +71,13 @@ public static class Solver
                 Merge(max, min);
                 map.Remove(min.id);
             }
+
+            var addedAllJunctions = map.Values.First().Size() == junctions.Count;
+            if (addedAllJunctions)
+            {
+                result.extension = j1.position.x * j2.position.x;
+                break;
+            }
         }
 
         var circuits = map.Values
@@ -71,11 +85,11 @@ public static class Solver
             .ToList();
 
         var largest = circuits.Take(3);
-        var total = largest
+        result.total = largest
             .Select(c => c.junctions.Count)
             .Aggregate(1L, (a, b) => a * b);
 
-        return total;
+        return result;
     }
 
     private static void FindLargestCircuit(

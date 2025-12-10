@@ -19,8 +19,8 @@ public class Program
         var sw = new Stopwatch();
         sw.Start();
 
-        var sum = Solver.Solve(junctions, iterations: 1000);
-        Console.WriteLine(sum);
+        var result = Solver.Solve(junctions, iterations: int.MaxValue);
+        Console.WriteLine(result.extension);
 
         sw.Stop();
 
