@@ -1,4 +1,4 @@
-﻿using aoc_2025.Task4;
+﻿using aoc_2025.Task5;
 
 namespace aoc_2025;
 
@@ -12,9 +12,8 @@ public class Program
 
     private void Run()
     {
-        var grid = Parser.Parse("input.txt");
-        var count = Solver.GetPaperRollCount(grid, remove: true);
-
-        Console.WriteLine($"Rolls: {count}");
+        var inventory = Parser.Parse("input.txt");
+        var sum = Solver.RangeSum(inventory.ranges);
+        Console.WriteLine(sum);
     }
 }

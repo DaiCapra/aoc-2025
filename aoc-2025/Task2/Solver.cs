@@ -1,4 +1,6 @@
-﻿namespace aoc_2025.Task2;
+﻿using Range = aoc_2025.Common.Range;
+
+namespace aoc_2025.Task2;
 
 public static class Solver
 {
