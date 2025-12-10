@@ -11,4 +11,4 @@ obj/
 *.lnk
 
 **/input.txt
-
+*.ps1
