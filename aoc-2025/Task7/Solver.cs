@@ -1,88 +1,70 @@
+using System.Text;
 using aoc_2025.Common;
 
 namespace aoc_2025.Task7;
 
-public class BeamNode(Vector2Int position) : Node<BeamNode>
+public class Result
 {
-    public Vector2Int position = position;
+    public long count;
+    public long timelines;
 }
 
 public static class Solver
 {
-    public static int Split(Grid grid, bool ignoreVisited = true)
+    public static Result Split(Grid grid)
     {
-        int count = ignoreVisited ? 0 : 1;
-        var beams = new List<Vector2Int>();
-        AddBeam(grid, beams, grid.start + Vector2Int.Down, ignoreVisited);
+        var result = new Result();
 
-        while (!beams.IsEmpty())
-        {
-            var beam = beams.Pop(0);
-            Console.Write($"Beams: {beams.Count}, Y: {beam.y}\r");
-            var next = beam + Vector2Int.Down;
-            if (next.y <= 0)
-            {
-                continue;
-            }
+        var visited = new Dictionary<Vector2Int, long>();
 
-            var cell = grid.cells[next.x, next.y];
-            if (cell.type is Type.Splitter)
-            {
-                AddBeam(grid, beams, next + Vector2Int.Left, ignoreVisited);
-                AddBeam(grid, beams, next + Vector2Int.Right, ignoreVisited);
-                count++;
-            }
-            else if (cell.type is Type.None)
-            {
-                AddBeam(grid, beams, next, ignoreVisited);
-            }
-
-            
-        }
-
-        return count;
-    }
-    
-    private static void AddBeam(Grid grid, List<Vector2Int> beams, Vector2Int position, bool ignoreVisited = true)
-    {
-        var cell = grid.cells[position.x, position.y];
-
-        if (ignoreVisited)
-        {
-            if (cell.type is Type.Beam)
-            {
-                return;
-            }
-
-            grid.cells[position.x, position.y].type = Type.Beam;
-        }
-
-
-        beams.Add(position);
-    }
-
-    public static void Print(Grid grid)
-    {
-        for (int y = grid.Height - 1; y >= 0; y--)
+        for (int y = grid.Height - 1; y >= 1; y--)
         {
             for (int x = 0; x < grid.Width; x++)
             {
-                var cell = grid.cells[x, y];
-                char c = cell.type switch
-                {
-                    Type.None => '.',
-                    Type.Start => 'S',
-                    Type.Splitter => '^',
-                    Type.Beam => '|',
-                    _ => '?'
-                };
-                Console.Write(c);
-            }
+                var position = new Vector2Int(x, y);
+                var below = position + Vector2Int.Down;
 
-            Console.WriteLine();
+                var visits = visited.GetValueOrDefault(position);
+
+                var cell = grid.Get(position);
+                var type = cell.type;
+                if (type is Type.Start)
+                {
+                    visited[below] = 1;
+                }
+
+                if (type is Type.None && visits > 0)
+                {
+                    var typeBelow = grid.Get(below).type;
+                    if (typeBelow is Type.None)
+                    {
+                        Visit(visited, below, visits);
+                    }
+                    else
+                    {
+                        Visit(visited, below + Vector2Int.Left, visits);
+                        Visit(visited, below + Vector2Int.Right, visits);
+                        result.count++;
+                    }
+                }
+            }
         }
 
-        Console.WriteLine();
-        Console.WriteLine();
+        for (int x = 0; x < grid.Width; x++)
+        {
+            var pos = new Vector2Int(x, 0);
+            if (visited.TryGetValue(pos, out var v))
+            {
+                result.timelines += v;
+            }
+        }
+
+        return result;
+    }
+
+
+    private static void Visit(Dictionary<Vector2Int, long> visited, Vector2Int position, long numberOfVisits)
+    {
+        visited[position] = visited.GetValueOrDefault(position) + numberOfVisits;
     }
 }

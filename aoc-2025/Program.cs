@@ -1,4 +1,5 @@
-﻿using aoc_2025.Task7;
+﻿using System.Diagnostics;
+using aoc_2025.Task8;
 
 namespace aoc_2025;
 
@@ -12,8 +13,18 @@ public class Program
 
     private void Run()
     {
-        var grid = Parser.Parse("input.txt");
-        var count = Solver.Split(grid, ignoreVisited: false);
-        Console.WriteLine(count);
+        var junctions = Parser.Parse("input.txt");
+        // var junctions = Parser.Parse("input-test.txt");
+
+        var sw = new Stopwatch();
+        sw.Start();
+
+        var sum = Solver.Solve(junctions, iterations: 1000);
+        Console.WriteLine(sum);
+
+        sw.Stop();
+
+        Console.WriteLine($"Time: {sw.ElapsedMilliseconds} ms");
+        Console.WriteLine();
     }
 }

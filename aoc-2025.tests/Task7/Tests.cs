@@ -8,7 +8,7 @@ public class Tests
     public void Example1()
     {
         var grid = Parser.Parse("Task7/test-input.txt");
-        var count = Solver.Split(grid, ignoreVisited: true);
+        var count = Solver.Split(grid).count;
         Assert.That(count, Is.EqualTo(21));
     }
 
@@ -16,7 +16,7 @@ public class Tests
     public void Example2()
     {
         var grid = Parser.Parse("Task7/test-input.txt");
-        var count = Solver.Split(grid, ignoreVisited: false);
+        var count = Solver.Split(grid).timelines;
         Assert.That(count, Is.EqualTo(40));
     }
 }
